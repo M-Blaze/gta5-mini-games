@@ -1,7 +1,9 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 import Image from 'next/image'
 
-import Phone from './components/Phone/Phone'
+import Phone from './components/Phone'
 
 const bankHack = () => {
   return (
