@@ -1,8 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
+interface TimerProps {
+  onFailure: () => void
+}
+
 const INTERVAL = 20
-const Timer = () => {
+const Timer:React.FC<TimerProps> = ({ onFailure }) => {
   const [remainingMilliSeconds, setRemainingMilliSeconds] = useState(15000)
   const seconds = Math.floor((remainingMilliSeconds % 60000) / 1000);
   const milliSeconds = remainingMilliSeconds % 1000;
@@ -16,6 +20,7 @@ const Timer = () => {
       if (remainingMilliseconds < 0) {
         remainingMilliseconds = 0
         clearInterval(timerInterval)
+        onFailure()
       }
 
       setRemainingMilliSeconds(remainingMilliseconds)
