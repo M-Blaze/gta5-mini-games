@@ -1,27 +1,33 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-import CharacterBox from './CharacterBox'
+import UnStableCharacter from './UnStableCharacter'
 
 const ROWS = new Array(18).fill(0)
-const Columns = new Array(9).fill(0)
+const COLUMNS = new Array(9).fill(0)
 
-const Characters = () => {
+interface CharactersProps {
+  isVisible: boolean,
+  children?: ReactNode
+}
+
+const Characters:React.FC<CharactersProps> = ({ isVisible, children }) => {
   return (
-    <div className="characters pt-12">
-        {
-          Columns.map((_, columnIndex) => {
-            return (
-              <div className='flex rowIndex' key={columnIndex}>
-                {
-                  ROWS.map((_, index) => {
-                    return <CharacterBox key={index} />
-                  })
-                }
-              </div>
-            )
-          })
-        }
-      </div>
+    <div className={`characters relative text-lime-500 ${ !isVisible && 'hidden' }`}>
+      {
+        COLUMNS.map((_, columnIndex) => {
+          return (
+            <div className='flex rowIndex' key={columnIndex}>
+              {
+                ROWS.map((_, index) => {
+                  return <UnStableCharacter key={index} />
+                })
+              }
+            </div>
+          )
+        })
+      }
+      { children }
+    </div>
   )
 }
 

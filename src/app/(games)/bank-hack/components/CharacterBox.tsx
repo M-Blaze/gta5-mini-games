@@ -1,22 +1,10 @@
-"use client"
-import React, { useEffect, useState } from 'react'
+interface CharacterBoxProps {
+  character: string
+}
 
-const CHARACTERS = '0123456789ABCDEF';
-
-const CharacterBox = () => {
-  const [ character, setCharacter ] = useState<string>('')
-  
-  useEffect(() => {
-    setInterval(() => {
-      const initialIndex = Math.floor(Math.random() * CHARACTERS.length)
-      const initialCharacter = CHARACTERS[initialIndex]
-      
-      setCharacter(initialCharacter)
-    }, 200)
-  }, [])
-
+const CharacterBox = ({ character }:CharacterBoxProps) => {
   return (
-    <div className='character-box flex justify-center items-center text-lime-500 border-2 border-neutral-400 font-bold text-xl' style={{ width: '43px', height: '43px' }}>
+    <div className='character-box flex justify-center items-center border-2 border-neutral-400 font-bold text-xl' style={{ width: '43px', height: '43px' }}>
       {character}
     </div>
   )
