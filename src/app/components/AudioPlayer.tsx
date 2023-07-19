@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 
 interface AudioPlayerProps {
-  src: string
+  src: string,
+  loop?: boolean
 }
 
-const AudioPlayer:React.FC<AudioPlayerProps> = ({ src }) => {
+const AudioPlayer:React.FC<AudioPlayerProps> = ({ src, loop }) => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null)
 
   const playAudio = () => {
@@ -21,7 +22,7 @@ const AudioPlayer:React.FC<AudioPlayerProps> = ({ src }) => {
 
   return (
     <>
-      <audio ref={audioPlayerRef}>
+      <audio ref={audioPlayerRef} loop={loop}>
         <source src={src} />
       </audio>
     </>
