@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
-const INTERVAL = 30
+const INTERVAL = 20
 const Timer = () => {
   const [remainingMilliSeconds, setRemainingMilliSeconds] = useState(15000)
   const seconds = Math.floor((remainingMilliSeconds % 60000) / 1000);
@@ -28,7 +28,7 @@ const Timer = () => {
   }, [])
 
   return (
-    <span className='absolute top-2 left-1/2 -translate-x-1/2 text-lime-500 text-2xl font-bold'>{`${seconds.toString().padStart(2, '0')}.${milliSeconds.toString().padStart(2, '0')}`} S</span>
+    <span className='absolute top-2 left-1/2 -translate-x-1/2 text-lime-500 text-2xl font-bold'>{`${seconds.toString().padStart(2, '0')}.${milliSeconds.toString().padStart(2, '0')}`} s</span>
   )
 }
 
