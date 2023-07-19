@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 
-import BankHack from './bankHack'
+import BankHack from './BankHack'
 import { BankHackContext } from './BankHackContext'
 
 const DEFAULT_STATE = {
