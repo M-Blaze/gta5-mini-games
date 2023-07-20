@@ -106,7 +106,7 @@ const BankHack = () => {
     <div className='game__bank-hack'>
       <Image src='/bank-hack-bg.jpg' alt='bank hack background image' className='-z-10' fill />
       <div className="h-screen flex justify-center items-center">
-        <div className='phone bg-zinc-800 relative' style={{ height: '484px', width: '967px', borderRadius: '50px' }}>
+        <div className='phone bg-zinc-800 relative' style={{ height: '476px', width: '967px', borderRadius: '50px' }}>
           <Speaker className='left-8'/>
           <Speaker className='right-8'/>
           <div className="camera w-4 h-4 bg-zinc-900 rounded-full absolute left-8 top-3/4" />
