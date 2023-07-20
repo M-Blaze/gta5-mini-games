@@ -54,9 +54,9 @@ const SettingsModal = () => {
   return (
     <>
       <div className="button-holder">
-        <button className='hover:bg-red-500 border-2 border-red-500 py-2 px-4 rounded-md mr-4 flex items-center' onClick={() => setIsModalOpen(true)}><BiSolidCog className='mr-1' /> Settings</button>
+        <button className='hover:bg-orange-500 border-2 border-orange-500 py-2 px-4 rounded-md mr-4 flex items-center' onClick={() => setIsModalOpen(true)}><BiSolidCog className='mr-1' /> Settings</button>
       </div>
-      <Modal style={ModalContentStyles} isOpen={isModalOpen} ariaHideApp={false}>
+      <Modal style={ModalContentStyles} isOpen={isModalOpen} ariaHideApp={false} onRequestClose={() => setIsModalOpen(false)}>
         <form id='settings-form'>
           <div className="select-group mb-3">
             <label htmlFor="#timer">Timer (in seconds)</label> <br />
