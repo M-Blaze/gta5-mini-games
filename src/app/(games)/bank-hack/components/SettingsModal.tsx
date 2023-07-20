@@ -26,13 +26,23 @@ const DEFAULT_SETTINGS = {
 
 type SETTINGSTYPE = typeof DEFAULT_SETTINGS
 const SettingsModal = () => {
-  // const SETTINGS_IN_LOCALSTORAGE = JSON.parse(localStorage.getItem('settings'))
+  const settingsJSON = localStorage.getItem('settings')
+  const initialSettings = (settingsJSON ? JSON.parse(settingsJSON) : DEFAULT_SETTINGS) as SETTINGSTYPE
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [settings, setSettings] = useState({ ...DEFAULT_SETTINGS })
+  const [settings, setSettings] = useState(initialSettings)
 
-  const selectHandler = (e: React.ChangeEvent) => {
-    console.log(settings)
-    console.log(e.target)
+  const selectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSettings(prevSettings => {
+      return {
+        ...prevSettings,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  const saveSettings = () => {
+    localStorage.setItem('settings', JSON.stringify(settings))
+    setIsModalOpen(false)
   }
 
   return (
@@ -78,7 +88,7 @@ const SettingsModal = () => {
             </select>
           </div>
           <div className="button-holder text-center flex justify-center items-center">
-            <button className='bg-lime-500 border-2 border-lime-500 text-white py-2 px-4 rounded-md mr-4'>Save Settings</button>
+            <button className='bg-lime-500 border-2 border-lime-500 text-white py-2 px-4 rounded-md mr-4' onClick={saveSettings}>Save Settings</button>
             <button className='bg-red-500 border-2 border-red-500 text-white py-2 px-4 rounded-md' onClick={() => setIsModalOpen(false)}>Cancel</button>
           </div>
         </form>
