@@ -5,9 +5,15 @@ import AudioPlayer from '@/app/components/AudioPlayer'
 import Codes from './Codes'
 
 const DEFAULT_COORDINATE:Coordinates = {
-  x: 14,
+  x: 18,
   y: 0
 }
+
+type DEFAULTSETTINGS = {
+  numberOfCodesOnLeft: number,
+  numberOfCodesOnRight: number,
+}
+
 
 interface RightCodeProps {
   codes: string[],
@@ -17,7 +23,12 @@ interface RightCodeProps {
 
 const ACCEPTABLE_KEYS = new Set(['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown', 'Enter'])
 const RightCode:React.FC<RightCodeProps> = ({ codes, targetCoordinates, onSubmit }) => {
-  const [coordinates, setCoordinates] = useState<Coordinates>(DEFAULT_COORDINATE)
+  const initialCoordinate = {...DEFAULT_COORDINATE}
+  const settingsJSON = localStorage.getItem('settings')
+  const settings = (settingsJSON ? JSON.parse(settingsJSON) : {}) as DEFAULTSETTINGS 
+  
+  initialCoordinate.x = initialCoordinate.x - (settings.numberOfCodesOnRight || 4)
+  const [coordinates, setCoordinates] = useState<Coordinates>(initialCoordinate)
   const [isLocked, setIsLocked] = useState<boolean>(false)
   const [isFlickering, setIsFlickering] = useState<boolean>(false)
   
@@ -32,7 +43,6 @@ const RightCode:React.FC<RightCodeProps> = ({ codes, targetCoordinates, onSubmit
       if (coordinatesMatched) {
         setIsFlickering(true)
         setIsLocked(true)
-
         setTimeout(() => {
           setIsFlickering(false)
         }, 300)

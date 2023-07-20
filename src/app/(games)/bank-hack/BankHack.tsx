@@ -27,7 +27,14 @@ const DEFAULT_COORDINATE:Coordinates = {
   y: 0
 }
 
-const CODE_LENGTH = 4, X_MIN = 0, X_MAX = 17, Y_MIN = 0, Y_MAX = 8
+const DEFAULT_SETTINGS = {
+  numberOfCodesOnLeft: 4,
+  numberOfCodesOnRight: 4,
+}
+
+type DEFAULTSETTINGS = typeof DEFAULT_SETTINGS
+
+const X_MIN = 0, X_MAX = 17, Y_MIN = 0, Y_MAX = 8
 const BankHack = () => {
   const [hackState, setHackState] = useState<HackStates>('')
   const [leftCodes, setLeftCodes] = useState<string[]>([])
@@ -37,10 +44,10 @@ const BankHack = () => {
   const [successCount, setSuccessCount] = useState<number>(0)
 
   const generateCodes = (length:number) => {
-    const codes = new Array(length).fill(0).map(() => {
+    const codes = new Array(Number(length)).fill(0).map(() => {
       return generateCharacter()
     })
-
+    
     return codes
   }
 
@@ -54,20 +61,21 @@ const BankHack = () => {
 
   const startHack = () => {
     setHackState('hack-started')
-
-    const leftCodes = generateCodes(CODE_LENGTH)
-    const rightCodes = generateCodes(CODE_LENGTH)
+    const settingsJSON = localStorage.getItem('settings')
+    const { numberOfCodesOnLeft, numberOfCodesOnRight } = settingsJSON ? JSON.parse(settingsJSON) as DEFAULTSETTINGS : DEFAULT_SETTINGS
+    const leftCodes = generateCodes(numberOfCodesOnLeft)
+    const rightCodes = generateCodes(numberOfCodesOnRight)
     const leftCoordinates = {
-      x: generateRandomCoordinate(X_MIN, X_MAX - CODE_LENGTH),
+      x: generateRandomCoordinate(X_MIN, X_MAX - numberOfCodesOnLeft),
       y: generateRandomCoordinate(Y_MIN, Y_MAX)
     }
     const rightCoordinates = {
-      x: generateRandomCoordinate(X_MIN, X_MAX - CODE_LENGTH),
+      x: generateRandomCoordinate(X_MIN, X_MAX - numberOfCodesOnRight),
       y: generateRandomCoordinate(Y_MIN, Y_MAX)
     }
 
     while (leftCoordinates.x === rightCoordinates.x) {
-      rightCoordinates.x = generateRandomCoordinate(X_MIN, X_MAX - CODE_LENGTH)
+      rightCoordinates.x = generateRandomCoordinate(X_MIN, X_MAX - numberOfCodesOnRight)
     }
 
     while (leftCoordinates.y === rightCoordinates.y) {
