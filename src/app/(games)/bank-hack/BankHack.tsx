@@ -45,11 +45,11 @@ const BankHack = () => {
   }
 
   const generateRandomCoordinate = (min:number, max:number) => {
-      const range = max - min + 1
-      const randomDecimal = Math.random()
-      const randomCoordinate = Math.floor(randomDecimal * range) + min
-      
-      return randomCoordinate
+    const range = max - min + 1
+    const randomDecimal = Math.random()
+    const randomCoordinate = Math.floor(randomDecimal * range) + min
+    
+    return randomCoordinate
   }
 
   const startHack = () => {
@@ -64,6 +64,14 @@ const BankHack = () => {
     const rightCoordinates = {
       x: generateRandomCoordinate(X_MIN, X_MAX - CODE_LENGTH),
       y: generateRandomCoordinate(Y_MIN, Y_MAX)
+    }
+
+    while (leftCoordinates.x === rightCoordinates.x) {
+      rightCoordinates.x = generateRandomCoordinate(X_MIN, X_MAX - CODE_LENGTH)
+    }
+
+    while (leftCoordinates.y === rightCoordinates.y) {
+      rightCoordinates.y = generateRandomCoordinate(Y_MIN, Y_MAX)
     }
 
     setLeftCoordinates(leftCoordinates)
