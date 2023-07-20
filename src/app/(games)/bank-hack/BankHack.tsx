@@ -111,7 +111,7 @@ const BankHack = () => {
           <Speaker className='left-8'/>
           <Speaker className='right-8'/>
           <div className="camera w-4 h-4 bg-zinc-900 rounded-full absolute left-8 top-3/4" />
-          <div className="screen absolute top-6 bottom-6 left-24 right-24 bg-black select-none"  style={{ paddingTop: '42px' }}>
+          <div className="screen absolute top-6 bottom-6 left-24 right-24 bg-black select-none text-white"  style={{ paddingTop: '42px' }}>
             {
               (hackState === '' || hackState === 'failure' || hackState === 'success') && 
               (
