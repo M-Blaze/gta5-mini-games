@@ -14,13 +14,7 @@ const Timer:React.FC<TimerProps> = ({ onFailure }) => {
   useEffect(() => {
     const settingsJSON = localStorage.getItem('settings')
     const startTime = settingsJSON ? (JSON.parse(settingsJSON).timer * 1000) : 15000
-
-    setRemainingMilliSeconds(startTime)
-  }, [])
-
-  useEffect(() => {
-    let remainingMilliseconds = remainingMilliSeconds;
-  
+    let remainingMilliseconds = startTime;
     const timerInterval = setInterval(() => {
       remainingMilliseconds -= INTERVAL
 
