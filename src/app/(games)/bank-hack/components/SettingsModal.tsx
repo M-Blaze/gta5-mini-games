@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { BiSolidCog } from 'react-icons/bi'
 
@@ -27,10 +27,15 @@ const DEFAULT_SETTINGS = {
 
 type SETTINGSTYPE = typeof DEFAULT_SETTINGS
 const SettingsModal = () => {
-  const settingsJSON = localStorage.getItem('settings')
-  const initialSettings = (settingsJSON ? JSON.parse(settingsJSON) : DEFAULT_SETTINGS) as SETTINGSTYPE
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [settings, setSettings] = useState(initialSettings)
+  const [settings, setSettings] = useState({ ...DEFAULT_SETTINGS })
+
+  useEffect(() => {
+    const settingsJSON = localStorage.getItem('settings')
+    const initialSettings = (settingsJSON ? JSON.parse(settingsJSON) : DEFAULT_SETTINGS) as SETTINGSTYPE
+
+    setSettings(initialSettings)
+  }, [])
 
   const selectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSettings(prevSettings => {

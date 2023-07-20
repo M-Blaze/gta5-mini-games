@@ -15,7 +15,6 @@ type DEFAULTSETTINGS = {
   numberOfCodesOnRight: number,
 }
 
-
 interface RightCodeProps {
   codes: string[],
   targetCoordinates: Coordinates,
@@ -24,14 +23,18 @@ interface RightCodeProps {
 
 const ACCEPTABLE_KEYS = new Set(['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown', 'Enter'])
 const RightCode:React.FC<RightCodeProps> = ({ codes, targetCoordinates, onSubmit }) => {
-  const initialCoordinate = {...DEFAULT_COORDINATE}
-  const settingsJSON = localStorage.getItem('settings')
-  const settings = (settingsJSON ? JSON.parse(settingsJSON) : {}) as DEFAULTSETTINGS 
-  
-  initialCoordinate.x = initialCoordinate.x - (settings.numberOfCodesOnRight || 4)
-  const [coordinates, setCoordinates] = useState<Coordinates>(initialCoordinate)
+  const [coordinates, setCoordinates] = useState<Coordinates>({ ...DEFAULT_COORDINATE })
   const [isLocked, setIsLocked] = useState<boolean>(false)
   const [isFlickering, setIsFlickering] = useState<boolean>(false)
+
+  useEffect(() => {
+    const initialCoordinate = {...DEFAULT_COORDINATE}
+    const settingsJSON = localStorage.getItem('settings')
+    const settings = (settingsJSON ? JSON.parse(settingsJSON) : {}) as DEFAULTSETTINGS 
+    
+    initialCoordinate.x = initialCoordinate.x - (settings.numberOfCodesOnRight || 4)
+    setCoordinates(initialCoordinate)
+  }, [])
   
   useEffect(() => {
     if (isLocked) return
