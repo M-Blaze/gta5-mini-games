@@ -22,7 +22,7 @@ const ModalContentStyles = {
 const DEFAULT_SETTINGS = {
   timer: 15,
   numberOfCodesOnLeft: 4,
-  numberOfCodesOnRight: 3,
+  numberOfCodesOnRight: 4,
 }
 
 type SETTINGSTYPE = typeof DEFAULT_SETTINGS
