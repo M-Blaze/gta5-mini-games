@@ -39,6 +39,10 @@ const RightCode:React.FC<RightCodeProps> = ({ codes, targetCoordinates, onSubmit
   useEffect(() => {
     if (isLocked) return
     
+    const settingsJSON = localStorage.getItem('settings')
+    const settings = (settingsJSON ? JSON.parse(settingsJSON) : {}) as DEFAULTSETTINGS 
+    const max_X = 18 - (settings.numberOfCodesOnRight || 4)
+    
     const checkCoordinates = () => {
       const { x:targetX, y:targetY } = targetCoordinates
       const { x, y } = coordinates
@@ -73,7 +77,7 @@ const RightCode:React.FC<RightCodeProps> = ({ codes, targetCoordinates, onSubmit
       if ((key === 'ArrowLeft') && (currentCoordinate.x > 0)) {
         currentCoordinate.x -= 1
       }
-      if ((key === 'ArrowRight') && (currentCoordinate.x < 14)) {
+      if ((key === 'ArrowRight') && (currentCoordinate.x < max_X)) {
         currentCoordinate.x += 1
       }
 

@@ -9,6 +9,11 @@ const DEFAULT_COORDINATE:Coordinates = {
   y: 0
 }
 
+type DEFAULTSETTINGS = {
+  numberOfCodesOnLeft: number,
+  numberOfCodesOnRight: number,
+}
+
 interface LeftCodeProps {
   codes: string[],
   targetCoordinates: Coordinates,
@@ -23,6 +28,10 @@ const LeftCode:React.FC<LeftCodeProps> = ({ codes, targetCoordinates, onSubmit }
   
   useEffect(() => {
     if (isLocked) return
+
+    const settingsJSON = localStorage.getItem('settings')
+    const settings = (settingsJSON ? JSON.parse(settingsJSON) : {}) as DEFAULTSETTINGS
+    const max_X = 18 - (settings.numberOfCodesOnLeft || 4)
 
     const checkCoordinates = () => {
       const { x:targetX, y:targetY } = targetCoordinates
@@ -58,7 +67,7 @@ const LeftCode:React.FC<LeftCodeProps> = ({ codes, targetCoordinates, onSubmit }
       if (['a', 'A'].includes(key) && (currentCoordinate.x > 0)) {
         currentCoordinate.x -= 1
       }
-      if (['d', 'D'].includes(key) && (currentCoordinate.x < 14)) {
+      if (['d', 'D'].includes(key) && (currentCoordinate.x < max_X)) {
         currentCoordinate.x += 1
       }
 
