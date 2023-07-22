@@ -9,7 +9,7 @@ export default function Home() {
         <h1>Mini games of Gta 5</h1>
       </div>
       <Link href='/constant-block' className='block w-1/6'>
-        <Card imageUrl='/constant-block.png' title='constant block' />
+        <Card imageUrl='/constant-block.png' title='Constant Block' />
       </Link>
     </main>
   )
