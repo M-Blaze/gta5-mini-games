@@ -1,7 +1,7 @@
 import React from 'react'
 
 import CharacterBox from './CharacterBox'
-import { Coordinates } from '../bankHack.types'
+import { Coordinates } from '../constantBlock.types'
 
 interface CodesProps {
   codes: string[],

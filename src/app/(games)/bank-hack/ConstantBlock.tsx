@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { VscDebugStart } from 'react-icons/vsc'
 
-import { generateCharacter } from './helpers/bank-hack.helpers'
+import { generateCharacter } from './helpers/constantBlock.helpers'
 
 import AudioPlayer from '@/app/components/AudioPlayer'
 import Speaker from './components/Speaker'
@@ -36,7 +36,7 @@ const DEFAULT_SETTINGS = {
 type DEFAULTSETTINGS = typeof DEFAULT_SETTINGS
 
 const X_MIN = 0, X_MAX = 17, Y_MIN = 0, Y_MAX = 8
-const BankHack = () => {
+const ConstantBlock = () => {
   const [hackState, setHackState] = useState<HackStates>('')
   const [leftCodes, setLeftCodes] = useState<string[]>([])
   const [leftCoordinates, setLeftCoordinates] = useState<Coordinates>(DEFAULT_COORDINATE)
@@ -113,8 +113,8 @@ const BankHack = () => {
   }
 
   return (
-    <div className='game__bank-hack relative'>
-      <Image src='/bank-hack-bg.jpg' alt='bank hack background image' className='-z-10' fill />
+    <div className='game__constant-block relative'>
+      <Image src='/constant-block-bg.jpg' alt='constant background image' className='-z-10' fill />
       <div className="min-h-screen flex justify-center items-center">
         <div className='phone bg-zinc-800 relative' style={{ height: '476px', width: '967px', borderRadius: '50px' }}>
           <Speaker className='left-8'/>
@@ -183,4 +183,4 @@ const BankHack = () => {
   )
 }
 
-export default BankHack
+export default ConstantBlock

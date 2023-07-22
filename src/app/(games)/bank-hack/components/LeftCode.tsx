@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Coordinates } from '../bankHack.types'
+import { Coordinates } from '../constantBlock.types'
 import AudioPlayer from '@/app/components/AudioPlayer'
 import Codes from './Codes'
 
